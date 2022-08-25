@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #7dbda7;
+}
+</style>
+</head>
+<script src="urbanareas.js"></script>
+
+<body>
+
+<h2>Atlanta Urbanized Areas</h2>
+
+<table id="mytable">
+  <tr>
+    <th>Year</th>
+    <th>Square Miles</th>
+  </tr>
+</table>
+
+</body>
+<script>
+  var x = document.getElementById('mytable')
+  for (var i = 0; i<urbanareas.objects.length; i++){
+    var myNewRow = document.createElement('tr')
+    var myNewCell1 = document.createElement('td')
+    var myNewCell2 = document.createElement('td')
+    myNewCell1.innerText = urbanareas.objects[i].Year
+    myNewCell2.innerText = urbanareas.objects[i].Square_Miles
+
+    myNewRow.append(myNewCell1)
+    myNewRow.append(myNewCell2)
+    x.append(myNewRow)
+  }
+
+
+
+</script>
+
+</html>
+
