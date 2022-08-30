@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Followill Ploty: Bar</title>
+</head>
+
+<style>
+     body {
+        background-color: rgb(166, 225, 201);
+    }
+    #myDiv {
+        background-color: darkgreen;
+        width: 800px;
+        height: 800px;
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.14.0/plotly.min.js" integrity="sha512-XDnqTWsAcVl16AYJoBHumISzIYThowGjR67jeL53NSp6tajsq2qf5UeAWvk1n6Hp3M2iMsV/ewhPScBiLCDs9Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="urbanareas.js"></script>
+
+
+
+<body>
+    <div Id = "myDiv" >
+        <script>
+            var y = urbanareas.Square_Miles //urbanareas.map(e=>Number(e.Square_Miles))
+            var x = urbanareas.Year //urbanareas.map(e=>(e.Year))
+        var trace1 = {
+            x: x,
+            y: y,
+            mode: 'markers',
+            type: 'bar',
+            marker: {
+                color: y, colorscale: 'Portland'
+            }
+          };
+
+          var layout = {
+            title: {
+                text: 'Urbanized Area in Atlanta, GA'
+            },
+            xaxis: {
+                title: 'Year'
+            },
+            yaxis: {
+                title: 'Square Miles'
+            }
+          }
+
+
+        //   var trace2 = {
+        //     x: [2, 3, 4, 5],
+        //     y: [16, 5, 11, 9],
+        //     mode: 'lines',
+        //     type: 'scatter'
+        //   };
+          
+        //   var trace3 = {
+        //     x: [1, 2, 3, 4],
+        //     y: [12, 9, 15, 12],
+        //     mode: 'lines+markers',
+        //     type: 'scatter'
+        //   };
+          
+          var data = [trace1]; 
+          // usually would have [trace1, trace2, trace3]; to get all 3
+          
+          Plotly.newPlot('myDiv', data, layout); // layout to show title
+        </script>
+    </div>
+    
+    <a href = "indexplotly.html">
+        Return to Homepage </a>
+    
+<p>
+Bar charts are a great visualization to show variation of a single phenomenon over time, even if there is no general trend to the data. These charts are limited, however, in that if there is too much data, it could be hard to interpret, and if there is not enough data, it could be difficult to determine any conclusions from the visualization. It is also not the most aesthetically pleasing chart based on its blocky nature that lacks flow.
+</p>
+</body>
+</html>
