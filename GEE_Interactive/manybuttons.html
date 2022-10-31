@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Many Buttons</title>
+</head>
+<style>
+    img{
+        position: absolute;
+        height: 400px;
+    }
+    button{
+        position: absolute;
+        top: 525px;
+    }
+
+</style>
+
+<body>
+    <h2>Click the buttons to see images of Atlanta urbanization in various years
+        <h3>
+            <a href = "indexGEE.html">
+                Return to Homepage </a> </h3>
+    </h2>
+
+    <img id = 'after' src="./image3.png" alt="">
+    <img id = 'another' src="./image2.png" alt="">
+    <img id = 'before' src="./image1.png" alt="">
+
+    <button style="left: 200px" onclick="myFunction('after')">2017</button>
+    <button style="left: 100px" onclick="myFunction('another')">2013</button>
+    <button style="left: 10px" onclick="myFunction('before')">2010</button>
+  
+</body>
+<script>
+    function myFunction(id){
+        var imgs = document.getElementsByTagName('img')
+        for(var i =0; i < imgs.length; i++){imgs[i].style.visibility='hidden'}
+        var daImg = document.getElementById(id)
+        daImg.style.visibility = 'visible'
+        console.log(daImg)
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+</head>
+<style>
+    img{
+        position: absolute;
+    }
+</style>
+
+<body>
+    <h2>Rewinding the Change in Atlanta Urbanization from 2017 back to 2010</h2>
+    <input type="range" min="0" max="1" value="1" step=".01" orient="vertical" oninput="myFunction(this.value)" />
+    <img id = 'image1' src="./image1.png" alt="" width="800px">
+    <img id = 'image3' src="./image3.png" alt="" width="800px">
+
+<script>
+    var image3 = document.getElementById('image3')
+    function myFunction(value){
+       // console.log(value)
+       image3.style.opacity = value;
+    }
+</script>
+
+<p>
+    <a href = "indexGEE.html">
+        Return to Homepage </a> </p>
+</body>
+</html>
