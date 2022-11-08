@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Project</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="crossorigin=""></script>
+    
+    <script src="./TractsJoined.js"></script>
+    <style>
+        h1 {
+        font-family: Georgia, serif;
+        font-size: 36px;
+        position: relative;
+        top: 10%;
+        text-align: center;
+        }
+        h2 {
+            font-family: Georgia, serif;
+        }
+        h3 {
+            font-family: Georgia, serif;
+        }
+        .legend {
+            line-height: 18px;
+            color: #000;
+            background-color: #ffffff;
+        }
+        .legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.7; 
+        }
+        #map { height: 650px;
+            width: 900px;
+            background-color: lightslategray;
+            text-align: center; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Annual Population Density in Atlanta Metro Area Census Tracts</h1>
+    <h2 id="theYear">Year</h2>
+    
+        <input type="range" name="year" value="2010" min="2010" max="2020" oninput="moveSlider(this.value)">
+        <div id="map"></div>
+        <div class="legend"></div>
+
+    <script>
+        var map = L.map('map').setView([33.7490, -84.3880], 11);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+    
+        var selectedYear = '2010'
+        function myStyle(feature) {
+            // console.log(feature.properties[selectedYear]) //look at the console log and notice that the selected year will call the property of the geojson and give you the data for that feature. 
+            // console.log(getColor(feature.properties[selectedYear])) //look at the console log and notice that the selected year will result in a color. 
+
+            return {
+            "fillColor": getColor(feature.properties[selectedYear]),
+            "color": "black",// notice that the selected year will call the property of the geojson
+            "weight": 0.75,
+            "opacity": 2.0,
+            "fillOpacity": 0.7
+            }
+        };
+
+        function getColor(popdens) {
+            return popdens < 2500 ? "#f7fbff" 
+            :popdens < 4500 ? "#9ecae1" 
+            :popdens < 8500 ? "#4292c6"
+            :popdens < 15000 ? "#4169e1"
+            : "#08306b";
+        };
+
+        var atltracts = L.geoJSON(TractsJoined, {style: myStyle}).addTo(map);
+
+        function moveSlider(value) {
+            selectedYear = value; // this changes the value of the selectedYear variable
+            atltracts.remove() // this removes the geojson 
+            atltracts = L.geoJSON(TractsJoined, {style: myStyle}).addTo(map); // this creates a new geojson, this time it will be based on the new selected Year 
+            document.getElementById('theYear').innerHTML = 'Year: '+ value  
+        }
+        moveSlider('2010')
+
+        // legend
+        var legend = L.control({position: 'bottomright'});
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'info legend'),
+                grades = [0, 2500, 4500, 8500, 15000],
+                labels = [];
+
+            for (var i = 0; i < grades.length; i++) {
+                div.innerHTML +=
+                    '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                    grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + ' per sq mi'+ '<br>' : '+ per sq mi');
+            }
+            return div;
+        };
+        legend.addTo(map);
+
+        var legendTitle = L.control({position: 'bottomright'});
+            legendTitle.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info');
+                this.update();
+                return this._div;
+            };
+
+            legendTitle.update = function (props) {
+                this._div.innerHTML = '<h3><u>Population Density Per Square Mile</u></h3>';
+            };
+            legendTitle.addTo(map);
+    </script>
+
+</body>
+</html>
