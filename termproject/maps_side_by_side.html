@@ -16,8 +16,9 @@
         }
         h2 {
             font-family: Georgia, serif;
-            text-align: center; 
+            text-align: left; 
         }
+
         h3 {
             font-family: Georgia, serif;
         }
@@ -81,6 +82,7 @@
   /* position: absolute; */
   top: 0;
   left: 0;
+  margin-bottom: 5%;
 }
 
 .right {
@@ -167,16 +169,16 @@ top: 20px;
 
     <div class="header">
         <h1>Displaying Urbanization and Sprawl in Atlanta Metro Area Census Tracts</h1>
-        <h2>Sarah Followill</h2>
+        <h4>Sarah Followill</h4>
       </div>
       <div class="container">
         <div class="left">
           
-            <h2>Annual Population Density by Census Tract - Vector Data</h2>
+            <h2>Annual Population Density by Census Tract</h2>
             <div class="slider-container">
                 <div class="slider">
                 <h3 id="theYear" style="margin: 0%;">Year</h3> Change year using the slider -->
-                <input id = "myRange" type="range" name="year" value="2010" min="2010" max="2020" oninput="moveSlider(this.value)">
+                <input id = "myRange" type="range" name="year" value="2010" min="2010" max="2019" oninput="moveSlider(this.value)">
                 </div>
             </div>
                 <div id="map"></div>
@@ -192,8 +194,7 @@ top: 20px;
         </div>
         <div class="right">
             <div>
-          <h2>Satellite Imagery of Atlanta Physical Urban Growth - Raster Data</h2>
-          <p style="margin: 0% 2%;">Click the buttons to see images of Atlanta urbanization in various years</p>
+          <h2>Satellite Imagery of Atlanta Physical Urban Growth</h2>
           
           <div class="button-container">
             <h3 style="line-height: 2px;">Year</h3>
